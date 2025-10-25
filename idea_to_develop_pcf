@@ -1,0 +1,13 @@
+the idea is to create a pcf control with the following properties:
+
+it will be similar to the addmediabutton control of power apps but with added features for image compression and button customization. the style must be nice and modern with height and width customizable for the control.
+
+the user will click the pcf control and be able to select an image from their device or capture a new photo using the camera (if the capture environment is set to camera). once the image is selected or captured, the control will compress the image based on the specified quality and maximum dimensions before storing it in the image data property in Base64 format.
+
+the control will have a property to change the text displayed on the button, allowing users to customize the button label according to their needs. like "upload image", "select photo", etc. once the user uploads a photo the control will display a thumbnail preview of the uploaded image within the control area, also it will show a x button on the top right corner of the thumbnail to allow users to remove the uploaded image if needed and upload a new one. if user removes the image the base64 data will be cleared from the image data property. 
+
+the control will be able to compress in image size height and width based on the properties set by the user. for example, if the user sets the maximum width to 800 pixels and maximum height to 600 pixels, the control will resize the image to fit within those dimensions while maintaining the aspect ratio. additionally, the user can set the compression quality as a percentage (e.g., 80% quality) to further reduce the file size of the image.
+
+also the user can enter a target size in kb for the image, and the control will attempt to compress the image to be under that size while balancing quality and dimensions.
+
+the user will be able to select the mode of image compression, by percentage quality or target size in kb. only one mode can be active at a time. also if height and width are not set the control will only compress by quality or target size not resize the image and keep the original dimensions.

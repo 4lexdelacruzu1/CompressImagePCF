@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="Sample" constructor="CompressResizeImage" version="1.0.1" display-name-key="CompressResizeImage" description-key="Image Compression and Resize Control" control-type="standard" >
+    <external-service-usage enabled="false">
+    </external-service-usage>
+    
+    <!-- Output property: Contains the compressed image in Base64 format -->
+    <property name="ImageData" display-name-key="Image Data" description-key="Base64 encoded compressed image data" of-type="SingleLine.Text" usage="bound" required="true" />
+    
+    <!-- Button text customization -->
+    <property name="ButtonText" display-name-key="Button Text" description-key="Text displayed on the upload button" of-type="SingleLine.Text" usage="input" required="false" default-value="Upload Image" />
+    
+    <!-- Capture mode: environment or camera -->
+    <property name="CaptureMode" display-name-key="Capture Mode" description-key="Image capture mode: environment or camera" of-type="Enum" usage="input" required="false" default-value="0">
+      <value name="Environment" display-name-key="Environment">0</value>
+      <value name="Camera" display-name-key="Camera">1</value>
+    </property>
+    
+    <!-- Compression mode: quality or target size -->
+    <property name="CompressionMode" display-name-key="Compression Mode" description-key="Compression mode: Quality or Target Size" of-type="Enum" usage="input" required="false" default-value="0">
+      <value name="Quality" display-name-key="Quality">0</value>
+      <value name="TargetSize" display-name-key="Target Size">1</value>
+    </property>
+    
+    <!-- Compression quality (0-100) -->
+    <property name="Quality" display-name-key="Quality" description-key="Compression quality percentage (0-100)" of-type="Whole.None" usage="input" required="false" default-value="80" />
+    
+    <!-- Target size in KB -->
+    <property name="TargetSizeKB" display-name-key="Target Size (KB)" description-key="Target file size in kilobytes" of-type="Whole.None" usage="input" required="false" default-value="100" />
+    
+    <!-- Maximum width -->
+    <property name="MaxWidth" display-name-key="Max Width" description-key="Maximum image width in pixels (0 = no resize)" of-type="Whole.None" usage="input" required="false" default-value="0" />
+    
+    <!-- Maximum height -->
+    <property name="MaxHeight" display-name-key="Max Height" description-key="Maximum image height in pixels (0 = no resize)" of-type="Whole.None" usage="input" required="false" default-value="0" />
+    
+    <resources>
+      <code path="index.ts" order="1"/>
+      <css path="css/CompressResizeImage.css" order="1" />
+    </resources>
+    
+    <feature-usage>
+      <uses-feature name="Device.captureImage" required="true" />
+      <uses-feature name="Device.pickFile" required="true" />
+    </feature-usage>
+  </control>
+</manifest>
