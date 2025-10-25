@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="Sample" constructor="CompressResizeImage" version="1.0.3" display-name-key="CompressResizeImage" description-key="Image Compression and Resize Control" control-type="standard" >
+  <control namespace="Sample" constructor="CompressResizeImage" version="1.0.4" display-name-key="CompressResizeImage" description-key="Image Compression and Resize Control" control-type="standard" >
     <external-service-usage enabled="false">
     </external-service-usage>
     

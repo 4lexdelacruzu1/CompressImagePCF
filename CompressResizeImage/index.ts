@@ -110,21 +110,19 @@ export class CompressResizeImage implements ComponentFramework.StandardControl<I
             (uploadIcon as HTMLElement).style.color = buttonTextColor;
         }
 
-        // Upload area border style
+        // Outer border style (always visible). Set as CSS variables on the main container.
         const borderThickness = context.parameters.BorderThickness?.raw || 1;
         const borderColor = context.parameters.BorderColor?.raw || "#cbd5e1";
-        const borderStyle = context.parameters.BorderStyle?.raw || "dashed";
-        const borderSpacing = context.parameters.BorderSpacing?.raw || 4;
-        this._uploadButton.style.border = `${borderThickness}px ${borderStyle} ${borderColor}`;
-        // For dashed/dotted, set dash spacing via borderStyle
-        if (borderStyle === "dashed" || borderStyle === "dotted") {
-            this._uploadButton.style.borderStyle = borderStyle;
-            // Use borderImage for custom dash/dot spacing
-            this._uploadButton.style.borderImage = `repeating-linear-gradient(90deg, ${borderColor}, ${borderColor} ${borderSpacing}px, transparent ${borderSpacing}px, transparent ${(borderSpacing*2)}px)`;
-            this._uploadButton.style.borderImageSlice = "1";
-        } else {
-            this._uploadButton.style.borderImage = "none";
-        }
+        const borderStyle = (context.parameters.BorderStyle?.raw || "dashed").toLowerCase();
+        const borderSpacing = context.parameters.BorderSpacing?.raw || 4; // reserved for future advanced dash spacing
+
+        // Apply variables so CSS ::after draws the border consistently
+        this._mainContainer.style.setProperty("--cri-border-thickness", `${borderThickness}px`);
+        this._mainContainer.style.setProperty("--cri-border-color", borderColor);
+        // Normalize allowed styles
+        const allowedStyles = ["solid", "dashed", "dotted"];
+        this._mainContainer.style.setProperty("--cri-border-style", allowedStyles.includes(borderStyle) ? borderStyle : "dashed");
+        // Note: BorderSpacing is intentionally not applied via border-image to avoid side clipping issues across browsers.
 
         // Internal image padding for thumbnail
         const imagePadding = context.parameters.ImagePadding?.raw || 8;
