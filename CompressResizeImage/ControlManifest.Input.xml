@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="Sample" constructor="CompressResizeImage" version="1.0.1" display-name-key="CompressResizeImage" description-key="Image Compression and Resize Control" control-type="standard" >
+  <control namespace="Sample" constructor="CompressResizeImage" version="1.0.3" display-name-key="CompressResizeImage" description-key="Image Compression and Resize Control" control-type="standard" >
     <external-service-usage enabled="false">
     </external-service-usage>
     
@@ -9,6 +9,27 @@
     
     <!-- Button text customization -->
     <property name="ButtonText" display-name-key="Button Text" description-key="Text displayed on the upload button" of-type="SingleLine.Text" usage="input" required="false" default-value="Upload Image" />
+
+  <!-- Button text size (in px) -->
+  <property name="ButtonTextSize" display-name-key="Button Text Size" description-key="Font size for the button text (in px)" of-type="Whole.None" usage="input" required="false" default-value="14" />
+
+  <!-- Button text color -->
+  <property name="ButtonTextColor" display-name-key="Button Text Color" description-key="Color of the button text (CSS color value)" of-type="SingleLine.Text" usage="input" required="false" default-value="#4b5563" />
+
+  <!-- Upload area border thickness (in px) -->
+  <property name="BorderThickness" display-name-key="Border Thickness" description-key="Thickness of the upload area border (in px)" of-type="Whole.None" usage="input" required="false" default-value="1" />
+
+  <!-- Upload area border color -->
+  <property name="BorderColor" display-name-key="Border Color" description-key="Color of the upload area border (CSS color value)" of-type="SingleLine.Text" usage="input" required="false" default-value="#cbd5e1" />
+
+  <!-- Upload area border style (dashed, dotted, solid) -->
+  <property name="BorderStyle" display-name-key="Border Style" description-key="Style of the upload area border (dashed, dotted, solid)" of-type="SingleLine.Text" usage="input" required="false" default-value="dashed" />
+
+  <!-- Upload area border dash/dot spacing (in px) -->
+  <property name="BorderSpacing" display-name-key="Border Spacing" description-key="Spacing for dashed/dotted border (in px)" of-type="Whole.None" usage="input" required="false" default-value="4" />
+
+  <!-- Internal image padding (in px) -->
+  <property name="ImagePadding" display-name-key="Image Padding" description-key="Padding inside the thumbnail image area (in px)" of-type="Whole.None" usage="input" required="false" default-value="8" />
     
     <!-- Capture mode: environment or camera -->
     <property name="CaptureMode" display-name-key="Capture Mode" description-key="Image capture mode: environment or camera" of-type="Enum" usage="input" required="false" default-value="0">

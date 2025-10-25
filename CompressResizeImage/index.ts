@@ -89,12 +89,46 @@ export class CompressResizeImage implements ComponentFramework.StandardControl<I
     public updateView(context: ComponentFramework.Context<IInputs>): void {
         this._context = context;
 
+
         // Update button text if provided
         const buttonText = context.parameters.ButtonText.raw || "Upload Image";
         const buttonTextElement = this._uploadButton.querySelector(".button-text");
         if (buttonTextElement) {
             buttonTextElement.textContent = buttonText;
         }
+
+        // Button text size and color
+        const buttonTextSize = context.parameters.ButtonTextSize?.raw || 14;
+        const buttonTextColor = context.parameters.ButtonTextColor?.raw || "#4b5563";
+        if (buttonTextElement) {
+            (buttonTextElement as HTMLElement).style.fontSize = buttonTextSize + "px";
+            (buttonTextElement as HTMLElement).style.color = buttonTextColor;
+        }
+        // Also set color for the icon for consistency
+        const uploadIcon = this._uploadButton.querySelector(".upload-icon");
+        if (uploadIcon) {
+            (uploadIcon as HTMLElement).style.color = buttonTextColor;
+        }
+
+        // Upload area border style
+        const borderThickness = context.parameters.BorderThickness?.raw || 1;
+        const borderColor = context.parameters.BorderColor?.raw || "#cbd5e1";
+        const borderStyle = context.parameters.BorderStyle?.raw || "dashed";
+        const borderSpacing = context.parameters.BorderSpacing?.raw || 4;
+        this._uploadButton.style.border = `${borderThickness}px ${borderStyle} ${borderColor}`;
+        // For dashed/dotted, set dash spacing via borderStyle
+        if (borderStyle === "dashed" || borderStyle === "dotted") {
+            this._uploadButton.style.borderStyle = borderStyle;
+            // Use borderImage for custom dash/dot spacing
+            this._uploadButton.style.borderImage = `repeating-linear-gradient(90deg, ${borderColor}, ${borderColor} ${borderSpacing}px, transparent ${borderSpacing}px, transparent ${(borderSpacing*2)}px)`;
+            this._uploadButton.style.borderImageSlice = "1";
+        } else {
+            this._uploadButton.style.borderImage = "none";
+        }
+
+        // Internal image padding for thumbnail
+        const imagePadding = context.parameters.ImagePadding?.raw || 8;
+        this._thumbnailImage.style.padding = imagePadding + "px";
 
         // Sync UI with bound ImageData (handle both set and cleared states)
         const incoming = context.parameters.ImageData.raw ?? null;
@@ -109,6 +143,12 @@ export class CompressResizeImage implements ComponentFramework.StandardControl<I
                 this._uploadButton.style.display = "flex";
             }
         }
+
+        // Ensure remove button is a perfect circle (not ellipse)
+        this._removeButton.style.width = this._removeButton.style.height = "32px";
+        this._removeButton.style.borderRadius = "50%";
+        this._removeButton.style.aspectRatio = "1 / 1";
+        this._removeButton.style.padding = "0";
     }
 
     private async onUploadClick(): Promise<void> {
